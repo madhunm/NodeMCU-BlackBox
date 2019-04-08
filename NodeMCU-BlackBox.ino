@@ -60,17 +60,17 @@ String wi_custom_value = "1.5";
 
 void saveSettings()
     {
-    StaticJsonBuffer<512> json_settingsBuffer;
-    JsonObject& settings = json_settingsBuffer.createObject();
-    JsonArray& json_onoff = settings.createNestedArray("onoff");
-    JsonArray& json_name = settings.createNestedArray("name");
-    JsonArray& json_id = settings.createNestedArray("id");
-    JsonArray& json_byte_n = settings.createNestedArray("byte_n");
-    JsonArray& json_inputmin = settings.createNestedArray("inputmin");
-    JsonArray& json_inputmax = settings.createNestedArray("inputmax");
-    JsonArray& json_outputmin = settings.createNestedArray("outputmin");
-    JsonArray& json_outputmax = settings.createNestedArray("outputmax");
-    JsonArray& json_unit = settings.createNestedArray("unit");
+    StaticJsonDocument json_settings(512);
+    JsonObject settings = json_settingsBuffer.createObject();
+    json_settings["json_onoff"] = "onoff";
+    JsonArray json_name = settings.createNestedArray("name");
+    JsonArray json_id = settings.createNestedArray("id");
+    JsonArray json_byte_n = settings.createNestedArray("byte_n");
+    JsonArray json_inputmin = settings.createNestedArray("inputmin");
+    JsonArray json_inputmax = settings.createNestedArray("inputmax");
+    JsonArray json_outputmin = settings.createNestedArray("outputmin");
+    JsonArray json_outputmax = settings.createNestedArray("outputmax");
+    JsonArray json_unit = settings.createNestedArray("unit");
     //char json[2048];
 
     String wi_onoff = server.arg("onoff");
@@ -111,7 +111,7 @@ void saveSettings()
 
 void saveVehicle()
     {
-    StaticJsonBuffer<512> json_vehicleBuffer;
+    StaticJsonDocument<512> json_vehicleBuffer;
     JsonObject& vehicle = json_vehicleBuffer.createObject();
     JsonArray& json_manufacturer = vehicle.createNestedArray("manufacturer");
     JsonArray& json_build_series = vehicle.createNestedArray("build_series");
@@ -162,20 +162,20 @@ void saveVehicle()
 
 void sendDataToClient()
 {
-    StaticJsonBuffer<512> json_dataBuffer;
-    JsonObject& data = json_dataBuffer.createObject();
-    JsonArray& json_rpm = data.createNestedArray("rpm");
-    JsonArray& json_rpm_max = data.createNestedArray("rpm_max");
-    JsonArray& json_speed_kmh = data.createNestedArray("speed_kmh");
-    JsonArray& json_engtemp_degC = data.createNestedArray("engtemp_degC");
-    JsonArray& json_engtemp_degC_min = data.createNestedArray("engtemp_degC_min");
-    JsonArray& json_engtemp_degC_max = data.createNestedArray("engtemp_degC_max");
-    JsonArray& json_volume_l = data.createNestedArray("volume_l");
-    JsonArray& json_volume_l_max = data.createNestedArray("volume_l_max");
-    JsonArray& json_mileage_km = data.createNestedArray("mileage_km");
-    JsonArray& json_gear = data.createNestedArray("gear");
-    JsonArray& json_accelerator_pedal_percent = data.createNestedArray("accelerator_pedal_percent");
-    JsonArray& json_custom_value = data.createNestedArray("custom_value");
+    StaticJsonDocument<512> json_dataBuffer;
+    JsonObject data = json_dataBuffer.createObject();
+    JsonArray json_rpm = data.createNestedArray("rpm");
+    JsonArray json_rpm_max = data.createNestedArray("rpm_max");
+    JsonArray json_speed_kmh = data.createNestedArray("speed_kmh");
+    JsonArray json_engtemp_degC = data.createNestedArray("engtemp_degC");
+    JsonArray json_engtemp_degC_min = data.createNestedArray("engtemp_degC_min");
+    JsonArray json_engtemp_degC_max = data.createNestedArray("engtemp_degC_max");
+    JsonArray json_volume_l = data.createNestedArray("volume_l");
+    JsonArray json_volume_l_max = data.createNestedArray("volume_l_max");
+    JsonArray json_mileage_km = data.createNestedArray("mileage_km");
+    JsonArray json_gear = data.createNestedArray("gear");
+    JsonArray json_accelerator_pedal_percent = data.createNestedArray("accelerator_pedal_percent");
+    JsonArray json_custom_value = data.createNestedArray("custom_value");
     char data_array[512];
 
     data["rpm"] = wi_rpm;
